@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>三民高二乙版 B3U4 單字拼寫與例句配對闖關 | guidance ~ obstacle</title>
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --primary-light: #EEF2FF;
+      --secondary: #0EA5E9;
+      --secondary-light: #E0F2FE;
+      --accent: #F59E0B;
+      --accent-light: #FEF3C7;
+      --success: #10B981;
+      --success-light: #D1FAE5;
+      --danger: #EF4444;
+      --danger-light: #FEE2E2;
+      --purple: #8B5CF6;
+      --purple-light: #EDE9FE;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --border-focus: #818CF8;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(135deg, #F0F4FF 0%, #FAF5FF 50%, #F0FDF4 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 12px 40px;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    /* 頂部導航列 */
+    header {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header-title-group h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1E1B4B;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title-group p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .badge-pill {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-timer {
+      background: #FEF3C7;
+      color: #B45309;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge-timer.timer-warning {
+      background: #FED7AA;
+      color: #C2410C;
+    }
+
+    .badge-timer.timer-danger {
+      background: #FEE2E2;
+      color: #DC2626;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .badge-score {
+      background: var(--success-light);
+      color: #065F46;
+    }
+
+    /* 進度長條 */
+    .timer-bar-container {
+      width: 100%;
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .timer-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #10B981, #6366F1);
+      transition: width 1s linear, background 0.3s;
+    }
+
+    /* 卡片共通樣式 */
+    .quest-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    /* 關卡階段進度標籤 */
+    .stage-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stage-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      background: #F1F5F9;
+      color: #64748B;
+      transition: all 0.3s;
+    }
+
+    .stage-step.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .stage-step.completed {
+      background: var(--success-light);
+      color: #047857;
+    }
+
+    /* 開始畫面 */
+    .start-screen {
+      text-align: center;
+      padding: 36px 20px;
+    }
+
+    .start-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .start-screen h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1E1B4B;
+      margin-bottom: 10px;
+    }
+
+    .start-screen .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 24px;
+    }
+
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      max-width: 760px;
+      margin: 0 auto 28px;
+      text-align: left;
+    }
+
+    .rule-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .rule-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rule-card-desc {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: #FFFFFF;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 14px 44px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-main:hover {
+      background: linear-gradient(135deg, #4338CA, #4F46E5);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(79, 70, 229, 0.45);
+    }
+
+    .btn-main:active {
+      transform: translateY(0);
+    }
+
+    /* 關卡一：口說與拼寫挑戰 */
+    .spelling-box {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .q-counter-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .chinese-prompt-card {
+      background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%);
+      border: 2px solid #C7D2FE;
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chinese-pos-badge {
+      display: inline-block;
+      background: #4F46E5;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .chinese-meaning {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1E1B4B;
+      letter-spacing: 1px;
+    }
+
+    .chinese-hint {
+      font-size: 14px;
+      color: #6366F1;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* 口說引導區塊 */
+    .oral-guide-panel {
+      background: #F8FAFC;
+      border: 1px dashed #CBD5E1;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .oral-guide-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .oral-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-oral {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: #334155;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-oral:hover {
+      background: #F1F5F9;
+      border-color: #94A3B8;
+    }
+
+    .btn-oral.listening {
+      background: #FEE2E2;
+      border-color: #EF4444;
+      color: #DC2626;
+      animation: pulse 1s infinite;
+    }
+
+    /* 五顆心發音評分卡片 */
+    .heart-rating-card {
+      background: #FFFBEB;
+      border: 1.5px solid #FCD34D;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .heart-rating-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .heart-rating-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #92400E;
+    }
+
+    .hearts-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 26px;
+      user-select: none;
+    }
+
+    .heart-icon {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s, filter 0.2s;
+      opacity: 0.3;
+      filter: grayscale(100%);
+      cursor: pointer;
+    }
+
+    .heart-icon:hover {
+      transform: scale(1.15);
+    }
+
+    .heart-icon.active {
+      opacity: 1;
+      filter: grayscale(0%);
+      animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes heartPop {
+      0% { transform: scale(0.6); }
+      60% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-score-tag {
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid #FDE68A;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .oral-status-feedback {
+      font-size: 13px;
+      color: #78350F;
+      background: rgba(254, 243, 199, 0.6);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    /* 拼字輸入區 */
+    .spelling-input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .letter-slots-display {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .slot-box {
+      width: 32px;
+      height: 38px;
+      border-bottom: 3px solid #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #1E293B;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .slot-box.filled {
+      border-bottom-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .spelling-input {
+      width: 100%;
+      max-width: 440px;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border: 2px solid #CBD5E1;
+      border-radius: 999px;
+      text-align: center;
+      letter-spacing: 2px;
+      color: #0F172A;
+      outline: none;
+      transition: all 0.2s;
+      background: #FFFFFF;
+    }
+
+    .spelling-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    }
+
+    .spelling-feedback {
+      min-height: 28px;
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+
+    .spelling-feedback.correct {
+      color: #059669;
+    }
+
+    .spelling-feedback.wrong {
+      color: #DC2626;
+    }
+
+    .btn-submit-spelling {
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 32px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-submit-spelling:hover {
+      background: var(--primary-hover);
+    }
+
+    /* 關卡二：課本例句連連看配對 */
+    .matching-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .matching-header-desc {
+      text-align: center;
+      font-size: 14.5px;
+      color: #475569;
+      background: #F1F5F9;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 6px;
+    }
+
+    .matching-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .matching-board {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-col-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #1E293B;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* 單字卡片 (左側) */
+    .word-chip {
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1E293B;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+      user-select: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .word-chip:hover:not(.matched) {
+      border-color: var(--primary);
+      transform: translateX(3px);
+      background: #F8FAFC;
+    }
+
+    .word-chip.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    .word-chip.matched {
+      background: #F0FDF4;
+      border-color: #86EFAC;
+      color: #166534;
+      cursor: default;
+    }
+
+    .word-chip .badge-match-order {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .word-chip.matched .badge-match-order {
+      background: #22C55E;
+      color: #FFFFFF;
+    }
+
+    /* 例句卡片 (右側) */
+    .sentence-card {
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.5;
+      transition: all 0.2s;
+      user-select: none;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .sentence-card:hover:not(.matched) {
+      border-color: var(--secondary);
+      transform: translateX(-3px);
+      background: #F8FAFC;
+    }
+
+    .sentence-card.selected {
+      border-color: var(--secondary);
+      background: var(--secondary-light);
+      color: #0369A1;
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+    }
+
+    .sentence-card.matched {
+      background: #F0FDF4;
+      border-color: #86EFAC;
+      color: #166534;
+      cursor: default;
+    }
+
+    .sentence-card .blank-target {
+      font-weight: 800;
+      color: var(--primary);
+      border-bottom: 2px dashed var(--primary);
+      padding: 0 4px;
+    }
+
+    .sentence-card.matched .blank-target {
+      color: #15803D;
+      border-bottom-style: solid;
+      background: #DCFCE7;
+      border-radius: 4px;
+    }
+
+    .sentence-card .sentence-trans {
+      font-size: 12.5px;
+      color: #64748B;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed #E2E8F0;
+    }
+
+    /* 結算報告畫面 */
+    .result-screen {
+      text-align: center;
+      padding: 30px 16px;
+    }
+
+    .score-circle-wrapper {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+    }
+
+    .score-circle-svg {
+      transform: rotate(-90deg);
+      width: 150px;
+      height: 150px;
+    }
+
+    .score-circle-bg {
+      fill: none;
+      stroke: #E2E8F0;
+      stroke-width: 10;
+    }
+
+    .score-circle-val {
+      fill: none;
+      stroke: #10B981;
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      transition: stroke-dashoffset 1.5s ease;
+    }
+
+    .score-circle-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 38px;
+      font-weight: 900;
+      color: #1E1B4B;
+    }
+
+    .score-circle-text span {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #1E1B4B;
+      margin-bottom: 8px;
+    }
+
+    .result-rank-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: var(--purple-light);
+      color: var(--purple);
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .stats-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      max-width: 680px;
+      margin: 0 auto 30px;
+    }
+
+    .stat-box {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    /* 複習明細表格 */
+    .review-section {
+      text-align: left;
+      margin-top: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .review-section h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1E1B4B;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .review-item-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .review-word-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .review-word {
+      font-size: 17px;
+      font-weight: 800;
+      color: #4F46E5;
+    }
+
+    .review-pos {
+      font-size: 13px;
+      color: #64748B;
+    }
+
+    .review-meaning {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .review-sentence-box {
+      background: #F8FAFC;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+      font-size: 13.5px;
+      color: #334155;
+    }
+
+    .review-sentence-trans {
+      font-size: 12.5px;
+      color: #64748B;
+      margin-top: 4px;
+    }
+
+    .btn-speak-icon {
+      background: #EEF2FF;
+      border: none;
+      color: #4F46E5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .btn-speak-icon:hover {
+      background: #4F46E5;
+      color: #FFFFFF;
+    }
+
+    /* 動作按鈕群 */
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: #334155;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #F1F5F9;
+    }
+
+    /* 隱藏元素輔助類別 */
+    .hidden {
+      display: none !important;
+    }
+
+    /* 晃動與彈跳動畫 */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .shake-anim {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+      header, .result-actions, .timer-bar-container {
+        display: none !important;
+      }
+      .quest-card {
+        box-shadow: none;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 頁首導航與資訊 -->
+  <header>
+    <div class="header-title-group">
+      <h1>
+        <span>📖</span> B3U4 核心單字精熟挑戰
+      </h1>
+      <p>三民高中英文（乙版）第三冊 Unit 4: A Journey of Redemption</p>
+    </div>
+    <div class="header-badges">
+      <div class="badge-pill" id="badgePoolSize">📚 單字庫: 24 字</div>
+      <div class="badge-pill badge-timer" id="badgeTimer">⏱ 10:00</div>
+      <div class="badge-pill badge-score" id="badgeScore">💯 得分: 0 / 100</div>
+    </div>
+  </header>
+
+  <!-- 10分鐘倒數計時進度條 -->
+  <div class="timer-bar-container">
+    <div class="timer-bar" id="timerBar"></div>
+  </div>
+
+  <!-- 關卡進度指示條 (遊戲進行時顯示) -->
+  <div class="stage-indicator hidden" id="stageIndicator">
+    <div class="stage-step active" id="stepIndicator1">
+      <span>1️⃣</span> 關卡一：口說發音 (30分) & 拼寫 (30分)
+    </div>
+    <div class="stage-step" id="stepIndicator2">
+      <span>2️⃣</span> 關卡二：課本例句連連看 (40分)
+    </div>
+  </div>
+
+  <!-- 主卡片容器 -->
+  <div class="quest-card" id="mainCard">
+
+    <!-- 畫面 1: 開始與任務說明 -->
+    <div class="start-screen" id="startScreen">
+      <div class="start-icon">🎯</div>
+      <h2>第三冊第四課 單字闖關挑戰</h2>
+      <p class="subtitle">
+        本挑戰依據課本單字列表（<b>guidance ~ obstacle</b>）隨機挑選 10 個核心單字，測試你的口說發音、英文字彙拼寫，以及對課本原文例句語境的掌握度！
+      </p>
+
+      <div class="rule-grid">
+        <div class="rule-card">
+          <div class="rule-card-title"><span>🎲</span> 隨機抽取 10 個單字</div>
+          <div class="rule-card-desc">每次挑戰從本單元 24 個核心單字隨機選出 10 題，隨機洗牌不重複。</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-title"><span>⏱</span> 10 分鐘限時倒數</div>
+          <div class="rule-card-desc">任務需在 10 分鐘 (600秒) 內全力完成，時間終了將自動交卷結算。</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-title"><span>🗣</span> 第一關：口說五心 (30分) & 拼寫 (30分)</div>
+          <div class="rule-card-desc">看中文大聲唸出英文單字（系統以 5 顆心評量發音標準度），並在輸入框完成正確拼寫。</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-title"><span>🔗</span> 第二關：例句連連看 (40分)</div>
+          <div class="rule-card-desc">將抽中的 10 個單字與課本原文例句進行配對，每題 4 分，全對可獲 40 分！</div>
+        </div>
+      </div>
+
+      <button class="btn-main" id="btnStartGame">
+        <span>🚀</span> 開始 10 分鐘挑戰 (Start Mission)
+      </button>
+    </div>
+
+    <!-- 畫面 2: 關卡一 - 看中文講英文與拼寫 -->
+    <div class="spelling-box hidden" id="spellingStage">
+      <div class="q-counter-tag" id="spellingCounter">第 1 / 10 題 (口說發音 3分 ＋ 單字拼寫 3分)</div>
+
+      <!-- 中文提示卡 -->
+      <div class="chinese-prompt-card">
+        <div class="chinese-pos-badge" id="chinesePos">n. [U]</div>
+        <div class="chinese-meaning" id="chineseMeaning">指導，引導</div>
+        <div class="chinese-hint" id="chinesePhonetic">[ˋgaɪdns]</div>
+      </div>
+
+      <!-- 口說引導欄 -->
+      <div class="oral-guide-panel">
+        <div class="oral-guide-text">
+          <span>🗣️</span> <b>步驟 1：看中文大聲唸出英文單字</b>
+        </div>
+        <div class="oral-actions">
+          <button class="btn-oral" id="btnOralListen" title="聆聽標準美式發音">
+            <span>🔊</span> 聽標準發音
+          </button>
+          <button class="btn-oral" id="btnOralRecord" title="點擊說出單字進行語音評分">
+            <span>🎙️</span> 麥克風錄音評分
+          </button>
+          <button class="btn-oral" id="btnOralSelfCheck" title="若環境無麥克風可聽音跟讀自評">
+            <span>🎧</span> 聽音跟讀自評
+          </button>
+        </div>
+      </div>
+
+      <!-- 五顆心發音評分呈現卡片 -->
+      <div class="heart-rating-card" id="heartRatingCard">
+        <div class="heart-rating-header">
+          <div class="heart-rating-title">
+            <span>💖</span> <b>口說發音標準度評等 (本題最高 3.0 分)：</b>
+          </div>
+          <div class="hearts-row" id="heartsRow" title="點擊心形亦可自評調整">
+            <span class="heart-icon" data-rating="1">❤️</span>
+            <span class="heart-icon" data-rating="2">❤️</span>
+            <span class="heart-icon" data-rating="3">❤️</span>
+            <span class="heart-icon" data-rating="4">❤️</span>
+            <span class="heart-icon" data-rating="5">❤️</span>
+          </div>
+          <div class="heart-score-tag" id="heartScoreTag">尚未錄音 (0.0 / 3.0 分)</div>
+        </div>
+        <div class="oral-status-feedback" id="oralStatusFeedback">
+          💡 請點擊「🎙️ 麥克風錄音評分」說出英文單字；若環境未接麥克風，亦可點選「🎧 聽音跟讀自評」。
+        </div>
+      </div>
+
+      <!-- 拼寫步驟引導 -->
+      <div style="font-size:14px; font-weight:700; color:#334155; margin-bottom:10px; text-align:center;">
+        <span>✍️</span> <b>步驟 2：拼寫英文單字 (本題 3.0 分)</b>
+      </div>
+
+      <!-- 拼寫字母格子與輸入欄 -->
+      <div class="spelling-input-group">
+        <div class="letter-slots-display" id="letterSlotsDisplay"></div>
+        <input type="text" class="spelling-input" id="spellingInput" placeholder="請在此輸入拼寫..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="spelling-feedback" id="spellingFeedback"></div>
+      </div>
+
+      <div>
+        <button class="btn-submit-spelling" id="btnSubmitSpelling">送出拼寫與成績 (Enter ↵)</button>
+      </div>
+    </div>
+
+    <!-- 畫面 3: 關卡二 - 課本例句連連看配對 -->
+    <div class="matching-container hidden" id="matchingStage">
+      <div class="matching-header-desc">
+        🎯 <b>例句連連看任務：</b>請點選左側「單字」，再點選右側對應的「課本原文例句」進行配對！共 10 題，每配對成功一組得 4 分（滿分 40 分）。
+      </div>
+
+      <div class="matching-board">
+        <!-- 左側：單字群 -->
+        <div class="match-col">
+          <div class="match-col-title">
+            <span>🔤 目標單字 (Words)</span>
+            <span id="matchedWordsCount">0 / 10 配對</span>
+          </div>
+          <div id="wordsListContainer" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+
+        <!-- 右側：課本原文例句群 -->
+        <div class="match-col">
+          <div class="match-col-title">
+            <span>📖 課本原文例句 (Sentences)</span>
+            <span>點擊以配對</span>
+          </div>
+          <div id="sentencesListContainer" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 畫面 4: 結算報告與複習解析 -->
+    <div class="result-screen hidden" id="resultStage">
+      <div class="score-circle-wrapper">
+        <svg class="score-circle-svg" viewBox="0 0 160 160">
+          <circle class="score-circle-bg" cx="80" cy="80" r="70" />
+          <circle class="score-circle-val" id="scoreCirclePath" cx="80" cy="80" r="70" />
+        </svg>
+        <div class="score-circle-text" id="finalScoreText">0<span>/100</span></div>
+      </div>
+
+      <h2 class="result-title" id="resultTitle">挑戰完成！</h2>
+      <div class="result-rank-badge" id="resultRankBadge">榮譽稱號結算中...</div>
+
+      <div class="stats-summary-grid">
+        <div class="stat-box">
+          <div class="stat-label">口說發音得分 (30分)</div>
+          <div class="stat-value" id="statOralScore">0 / 30</div>
+          <div style="font-size:12px; color:#F59E0B; margin-top:3px; font-weight:700;" id="statOralAvgHearts">平均 0 顆心 ❤️</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">單字拼寫得分 (30分)</div>
+          <div class="stat-value" id="statSpellingScore">0 / 30</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">例句配對得分 (40分)</div>
+          <div class="stat-value" id="statMatchingScore">0 / 40</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">任務總耗時</div>
+          <div class="stat-value" id="statTimeSpent">00:00</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">綜合達成率</div>
+          <div class="stat-value" id="statAccuracy">0%</div>
+        </div>
+      </div>
+
+      <!-- 複習明細清單 -->
+      <div class="review-section">
+        <h3><span>📝</span> 本次 10 個核心單字與課本例句解析</h3>
+        <div class="review-list" id="reviewListContainer"></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-main" id="btnRestartGame">
+          <span>🔄</span> 再挑戰一次 (重新隨機抽題)
+        </button>
+        <button class="btn-secondary" onclick="window.print()">
+          <span>🖨️</span> 列印 / 儲存成績報告
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ==========================================================
+     三民普通型高級中學英文（乙版）第三冊 Unit 4
+     《A Journey of Redemption》核心單字資料庫 (guidance ~ obstacle)
+     ========================================================== */
+  const VOCAB_DATABASE = [
+    {
+      id: 1,
+      word: "guidance",
+      pos: "n. [U]",
+      phonetic: "[ˋgaɪdns]",
+      chinese: "指導，引導",
+      sentence: "The new clerk wasn't yet able to work independently, so she asked for guidance from her co-workers on how to deal with customers.",
+      translation: "新來的店員還不能獨立作業，所以她向同事請教如何應對顧客。"
+    },
+    {
+      id: 2,
+      word: "publish",
+      pos: "vt.",
+      phonetic: "[ˋpʌblɪʃ]",
+      chinese: "出版；發行",
+      sentence: "The first print run of the book sold out within a week of being published.",
+      translation: "這本書的首刷在出版一週內就被搶購一空。"
+    },
+    {
+      id: 3,
+      word: "forgiveness",
+      pos: "n. [U]",
+      phonetic: "[fɚˋgɪvnɪs]",
+      chinese: "寬恕，原諒",
+      sentence: "Although Olivia begged for Tom's forgiveness, he was still mad at her.",
+      translation: "儘管 Olivia 請求 Tom 的原諒，他仍在生她的氣。"
+    },
+    {
+      id: 4,
+      word: "theme",
+      pos: "n. [C]",
+      phonetic: "[θim]",
+      chinese: "主題，中心思想",
+      sentence: "The theme of the movie was unclear. Many in the audience couldn't understand what it tried to convey.",
+      translation: "這部電影的主題不明確。許多觀眾無法理解它試圖傳達什麼。"
+    },
+    {
+      id: 5,
+      word: "character",
+      pos: "n. [C]",
+      phonetic: "[ˋkærɪktɚ]",
+      chinese: "角色，人物；性格",
+      sentence: "The novelist spent months developing each character in the story to make them feel real and relatable.",
+      translation: "小說家花了數個月塑造故事中的每個角色，讓他們感覺真實且令人產生共鳴。"
+    },
+    {
+      id: 6,
+      word: "characteristic",
+      pos: "n. [C]",
+      phonetic: "[͵kærɪktəˋrɪstɪk]",
+      chinese: "特色，特徵",
+      sentence: "Kindness and patience are the most admirable characteristics of our English teacher.",
+      translation: "仁慈與耐心是我們英文老師最令人欽佩的特質。"
+    },
+    {
+      id: 7,
+      word: "crime",
+      pos: "n. [C, U]",
+      phonetic: "[kraɪm]",
+      chinese: "罪行；犯罪活動",
+      sentence: "Committing a serious crime like robbery can lead to many years behind bars.",
+      translation: "犯下像搶劫這樣的嚴重罪行可能會導致多年的牢獄之災。"
+    },
+    {
+      id: 8,
+      word: "regain",
+      pos: "vt.",
+      phonetic: "[rɪˋgen]",
+      chinese: "重新獲得，奪回",
+      sentence: "It was hard for Shirley to regain her coworkers' trust after she messed up a large project.",
+      translation: "在 Shirley 搞砸一個大專案後，她很難重新獲得同事的信任。"
+    },
+    {
+      id: 9,
+      word: "steal",
+      pos: "vt.",
+      phonetic: "[stil]",
+      chinese: "偷取，盜竊",
+      sentence: "The thief broke into the house late at night and tried to steal the expensive jewelry.",
+      translation: "竊賊在深夜潛入屋內，試圖偷走昂貴的珠寶。"
+    },
+    {
+      id: 10,
+      word: "adopt",
+      pos: "vt.",
+      phonetic: "[əˋdɑpt]",
+      chinese: "選用，採納；領養",
+      sentence: "Beginning his career as a child actor, Robin adopted his stage name from the first role he played.",
+      translation: "Robin 從童星開始他的演藝生涯，並從他扮演的第一個角色採用了他的藝名。"
+    },
+    {
+      id: 11,
+      word: "identity",
+      pos: "n. [C]",
+      phonetic: "[aɪˋdɛntətɪ]",
+      chinese: "身分；認同",
+      sentence: "A passport is the most commonly accepted way to confirm one's identity when a person travels internationally.",
+      translation: "護照是一個人出國旅行時最常用來確認身分的方式。"
+    },
+    {
+      id: 12,
+      word: "mercy",
+      pos: "n. [U]",
+      phonetic: "[ˋmɝsɪ]",
+      chinese: "仁慈，寬容，慈悲",
+      sentence: "The slave went down on his knees in front of the king and begged for mercy.",
+      translation: "那名奴隸在國王面前跪下，乞求寬恕。"
+    },
+    {
+      id: 13,
+      word: "individual",
+      pos: "n. [C]",
+      phonetic: "[͵ɪndəˋvɪdʒʊəl]",
+      chinese: "個體，個人",
+      sentence: "You don't need to find a partner, since both individuals and teams are allowed to take part in this game.",
+      translation: "你不需要尋找夥伴，因為個人和團體都可以參加這個遊戲。"
+    },
+    {
+      id: 14,
+      word: "scar",
+      pos: "n. [C]",
+      phonetic: "[skɑr]",
+      chinese: "傷疤；痕跡",
+      sentence: "The surgery left a small scar on her arm. If she didn't tell you about it, you might not even notice it.",
+      translation: "手術在她的手臂上留下了一個小傷疤。如果她不說，你可能根本不會注意到。"
+    },
+    {
+      id: 15,
+      word: "bruise",
+      pos: "n. [C]",
+      phonetic: "[bruz]",
+      chinese: "瘀青，擦傷",
+      sentence: "The bruises on Melissa's legs are from falling down the stairs.",
+      translation: "Melissa 腿上的瘀青是從樓梯上摔下來造成的。"
+    },
+    {
+      id: 16,
+      word: "disturb",
+      pos: "vt.",
+      phonetic: "[dɪsˋtɝb]",
+      chinese: "打擾；使煩惱",
+      sentence: "If you finish the test early, please remain seated so that you don't disturb the other students.",
+      translation: "如果你提早完成考試，請留在座位上以免打擾其他同學。"
+    },
+    {
+      id: 17,
+      word: "intense",
+      pos: "adj.",
+      phonetic: "[ɪnˋtɛns]",
+      chinese: "劇烈的；強烈的",
+      sentence: "The treatment caused the patient such intense pain that she could hardly bear it.",
+      translation: "治療為患者帶來劇烈的疼痛，讓她難以忍受。"
+    },
+    {
+      id: 18,
+      word: "justice",
+      pos: "n. [U]",
+      phonetic: "[ˋdʒʌstɪs]",
+      chinese: "正義，公正",
+      sentence: "The public hoped that the murderer would spend his whole life in jail, so justice would be done.",
+      translation: "大眾希望這名兇手能被終身監禁，這樣正義才得以伸張。"
+    },
+    {
+      id: 19,
+      word: "reward",
+      pos: "vt./n.",
+      phonetic: "[rɪˋwɔrd]",
+      chinese: "獎賞；報酬，回報",
+      sentence: "Ms. Pfeiffer rewarded her employees with free movie tickets for securing a major business contract.",
+      translation: "Pfeiffer 女士為了慶祝員工成功拿下一個重要的商業合約，獎賞他們免費的電影票。"
+    },
+    {
+      id: 20,
+      word: "legal",
+      pos: "adj.",
+      phonetic: "[ˋligl]",
+      chinese: "法律的，合法的",
+      sentence: "It is a good idea to seek legal advice when you draft or review contracts in order to protect and ensure your rights.",
+      translation: "要起草或審查合約時，最好尋求法律建議，以保護和確保你的權利。"
+    },
+    {
+      id: 21,
+      word: "confront",
+      pos: "vt.",
+      phonetic: "[kənˋfrʌnt]",
+      chinese: "處理，解決；使面對",
+      sentence: "We can't avoid confronting this issue, even though it's uncomfortable.",
+      translation: "儘管它令人不安，我們無法避免面對這個問題。"
+    },
+    {
+      id: 22,
+      word: "recommend",
+      pos: "vt.",
+      phonetic: "[͵rɛkəˋmɛnd]",
+      chinese: "推薦，介紹，建議",
+      sentence: "With only two bedrooms, this small apartment is recommended for a household of two to three persons.",
+      translation: "這間小公寓只有兩間臥室，建議兩到三人的家庭入住。"
+    },
+    {
+      id: 23,
+      word: "weep",
+      pos: "vi.",
+      phonetic: "[wip]",
+      chinese: "哭泣，流淚",
+      sentence: "Sara wept for joy when her boyfriend proposed to her.",
+      translation: "當 Sara 的男友向她求婚時，她高興得哭泣。"
+    },
+    {
+      id: 24,
+      word: "obstacle",
+      pos: "n. [C]",
+      phonetic: "[ˋɑbstək!]",
+      chinese: "障礙，阻礙",
+      sentence: "My poor study habits are an obstacle to getting good grades.",
+      translation: "我不良的學習習慣是取得好成績的阻礙。"
+    }
+  ];
+
+  /* ==========================================================
+     音效合成器 (Web Audio API) - 無需任何外部檔案即可播放音效
+     ========================================================== */
+  const SoundFX = {
+    ctx: null,
+    init() {
+      if (!this.ctx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) this.ctx = new AudioCtx();
+      }
+    },
+    playTone(freq, type = 'sine', duration = 0.15, gainVal = 0.1) {
+      this.init();
+      if (!this.ctx) return;
+      try {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+        gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio tone error', e);
+      }
+    },
+    correct() {
+      this.playTone(523.25, 'triangle', 0.12, 0.15); // C5
+      setTimeout(() => this.playTone(659.25, 'triangle', 0.2, 0.15), 100); // E5
+    },
+    wrong() {
+      this.playTone(220, 'sawtooth', 0.25, 0.15); // A3
+    },
+    matchSuccess() {
+      this.playTone(440, 'sine', 0.1, 0.12);
+      setTimeout(() => this.playTone(554.37, 'sine', 0.1, 0.12), 80);
+      setTimeout(() => this.playTone(659.25, 'sine', 0.25, 0.15), 160);
+    },
+    completeFanfare() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((f, idx) => {
+        setTimeout(() => this.playTone(f, 'triangle', 0.35, 0.2), idx * 140);
+      });
+    }
+  };
+
+  /* ==========================================================
+     遊戲核心狀態管理
+     ========================================================== */
+  const Game = {
+    totalTimeSeconds: 600, // 10 分鐘 (600 秒)
+    remainingSeconds: 600,
+    timerInterval: null,
+    
+    selectedWords: [],       // 本次隨機抽取的 10 個單字物件
+    spellingIndex: 0,        // 第一階段目前答題索引 (0~9)
+    spellingResults: [],     // 記錄每個單字作答紀錄: { wordObj, isCorrect, userAnswer, oralHearts, oralScore, spokenText }
+    
+    oralScore: 0,            // 口說發音得分 (滿分 30)
+    spellingScore: 0,        // 單字拼寫得分 (滿分 30)
+    matchingScore: 0,        // 第二關例句配對得分 (滿分 40)
+    
+    // 當前題目的口說評分狀態
+    currentOralRating: {
+      hearts: 0,
+      score: 0,
+      spoken: '',
+      feedback: ''
+    },
+
+    // 第二關配對狀態
+    selectedWordItem: null,
+    selectedSentenceItem: null,
+    matchedPairsCount: 0,
+
+    init() {
+      this.bindEvents();
+    },
+
+    bindEvents() {
+      document.getElementById('btnStartGame').addEventListener('click', () => this.startGame());
+      document.getElementById('btnRestartGame').addEventListener('click', () => this.startGame());
+      
+      // 拼字提交
+      document.getElementById('btnSubmitSpelling').addEventListener('click', () => this.submitSpelling());
+      const spellingInput = document.getElementById('spellingInput');
+      spellingInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.submitSpelling();
+        }
+      });
+      spellingInput.addEventListener('input', (e) => {
+        this.updateLetterSlots(e.target.value);
+      });
+
+      // 口說發音按鈕
+      document.getElementById('btnOralListen').addEventListener('click', () => {
+        const curWord = this.selectedWords[this.spellingIndex];
+        if (curWord) speakEnglish(curWord.word);
+      });
+
+      // 口說語音辨識與五心評分
+      document.getElementById('btnOralRecord').addEventListener('click', () => this.startSpeechRecognition());
+
+      // 聽音跟讀自評按鈕 (供無麥克風或教室安靜環境使用)
+      document.getElementById('btnOralSelfCheck').addEventListener('click', () => this.handleOralSelfCheck());
+
+      // 支援點擊五顆心手動微調評等 (便利教師或學生自評)
+      const heartIcons = document.querySelectorAll('#heartsRow .heart-icon');
+      heartIcons.forEach((icon) => {
+        icon.addEventListener('click', (e) => {
+          const rating = parseInt(e.currentTarget.dataset.rating, 10);
+          if (rating >= 1 && rating <= 5) {
+            const score = parseFloat((rating * 0.6).toFixed(1));
+            this.setHearts(
+              rating,
+              `👤 自評調整：已手動設定口說評等為 ${rating} 顆心 (${score.toFixed(1)} / 3.0 分)！`,
+              score,
+              this.currentOralRating.spoken || '自評確認'
+            );
+          }
+        });
+      });
+    },
+
+    // 啟動遊戲
+    startGame() {
+      SoundFX.init();
+      
+      // 隨機抽選 10 個單字
+      const shuffled = [...VOCAB_DATABASE].sort(() => 0.5 - Math.random());
+      this.selectedWords = shuffled.slice(0, 10);
+      
+      // 重設狀態
+      this.remainingSeconds = this.totalTimeSeconds;
+      this.spellingIndex = 0;
+      this.spellingResults = [];
+      this.oralScore = 0;
+      this.spellingScore = 0;
+      this.matchingScore = 0;
+      this.matchedPairsCount = 0;
+      this.selectedWordItem = null;
+      this.selectedSentenceItem = null;
+
+      // 更新介面顯示
+      this.updateScoreBadge();
+      this.startTimer();
+
+      // 切換畫面
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('resultStage').classList.add('hidden');
+      document.getElementById('matchingStage').classList.add('hidden');
+      document.getElementById('stageIndicator').classList.remove('hidden');
+      document.getElementById('spellingStage').classList.remove('hidden');
+
+      this.updateStageStep(1);
+      this.loadSpellingQuestion();
+    },
+
+    // 倒數計時器
+    startTimer() {
+      clearInterval(this.timerInterval);
+      this.updateTimerDisplay();
+
+      this.timerInterval = setInterval(() => {
+        this.remainingSeconds--;
+        this.updateTimerDisplay();
+
+        if (this.remainingSeconds <= 0) {
+          clearInterval(this.timerInterval);
+          alert('⏰ 10 分鐘時間到！現在為您結算成績！');
+          this.finishGame();
+        }
+      }, 1000);
+    },
+
+    updateTimerDisplay() {
+      const minutes = Math.floor(this.remainingSeconds / 60);
+      const seconds = this.remainingSeconds % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      
+      const timerBadge = document.getElementById('badgeTimer');
+      timerBadge.textContent = `⏱ ${formatted}`;
+
+      // 進度條寬度
+      const percent = (this.remainingSeconds / this.totalTimeSeconds) * 100;
+      const timerBar = document.getElementById('timerBar');
+      timerBar.style.width = `${percent}%`;
+
+      // 顏色警示
+      if (this.remainingSeconds <= 30) {
+        timerBadge.className = 'badge-pill badge-timer timer-danger';
+        timerBar.style.background = '#EF4444';
+      } else if (this.remainingSeconds <= 120) {
+        timerBadge.className = 'badge-pill badge-timer timer-warning';
+        timerBar.style.background = '#F59E0B';
+      } else {
+        timerBadge.className = 'badge-pill badge-timer';
+        timerBar.style.background = 'linear-gradient(90deg, #10B981, #6366F1)';
+      }
+    },
+
+    updateScoreBadge() {
+      const totalScore = Math.round(this.oralScore + this.spellingScore + this.matchingScore);
+      document.getElementById('badgeScore').textContent = `💯 得分: ${totalScore} / 100`;
+    },
+
+    updateStageStep(stageNum) {
+      const step1 = document.getElementById('stepIndicator1');
+      const step2 = document.getElementById('stepIndicator2');
+      if (stageNum === 1) {
+        step1.className = 'stage-step active';
+        step2.className = 'stage-step';
+      } else if (stageNum === 2) {
+        step1.className = 'stage-step completed';
+        step2.className = 'stage-step active';
+      }
+    },
+
+    /* ----------------------------------------------------
+       第一階段：看中文講英文（五心評分）與拼寫挑戰
+       ---------------------------------------------------- */
+    loadSpellingQuestion() {
+      if (this.spellingIndex >= this.selectedWords.length) {
+        // 第一階段完成，進入第二階段
+        this.transitionToMatchingStage();
+        return;
+      }
+
+      const current = this.selectedWords[this.spellingIndex];
+      document.getElementById('spellingCounter').textContent = `第 ${this.spellingIndex + 1} / 10 題 (口說發音 3分 ＋ 單字拼寫 3分)`;
+      document.getElementById('chinesePos').textContent = current.pos;
+      document.getElementById('chineseMeaning').textContent = current.chinese;
+      document.getElementById('chinesePhonetic').textContent = `${current.phonetic} (單字長度：${current.word.length} 個字母)`;
+      
+      const input = document.getElementById('spellingInput');
+      input.value = '';
+      input.disabled = false;
+      document.getElementById('spellingFeedback').textContent = '';
+      document.getElementById('spellingFeedback').className = 'spelling-feedback';
+      document.getElementById('btnSubmitSpelling').disabled = false;
+
+      // 重設口說評等狀態
+      this.setHearts(
+        0,
+        '💡 請點擊「🎙️ 麥克風錄音評分」說出英文單字；若環境未接麥克風，亦可點選「🎧 聽音跟讀自評」。',
+        0,
+        ''
+      );
+
+      this.renderLetterSlots(current.word.length);
+      setTimeout(() => input.focus(), 100);
+    },
+
+    // 設定與呈現五顆心評分
+    setHearts(hearts, message, score, spoken = '') {
+      this.currentOralRating = {
+        hearts: hearts,
+        score: typeof score === 'number' ? score : parseFloat((hearts * 0.6).toFixed(1)),
+        spoken: spoken,
+        feedback: message
+      };
+
+      const heartIcons = document.querySelectorAll('#heartsRow .heart-icon');
+      heartIcons.forEach((icon, idx) => {
+        if (idx < hearts) {
+          icon.classList.add('active');
+        } else {
+          icon.classList.remove('active');
+        }
+      });
+
+      const scoreTag = document.getElementById('heartScoreTag');
+      if (hearts === 0) {
+        scoreTag.textContent = '尚未錄音 (0.0 / 3.0 分)';
+      } else {
+        scoreTag.textContent = `${this.currentOralRating.score.toFixed(1)} / 3.0 分 (${hearts} 顆心)`;
+      }
+
+      const feedbackEl = document.getElementById('oralStatusFeedback');
+      if (feedbackEl) {
+        feedbackEl.textContent = message;
+      }
+    },
+
+    // 聽音跟讀自評備援
+    handleOralSelfCheck() {
+      const current = this.selectedWords[this.spellingIndex];
+      if (!current) return;
+
+      speakEnglish(current.word);
+      // 自動給予 5 顆心 (滿分 3.0)，並提示可微調
+      this.setHearts(
+        5,
+        `🎧 已播放標準發音並完成跟讀！授予滿心 5 顆心 (3.0 分)！(亦可點擊心形自由調整)`,
+        3.0,
+        '聽音跟讀'
+      );
+      SoundFX.matchSuccess();
+    },
+
+    // 計算 Levenshtein 相似度演算法
+    computeLevenshteinSimilarity(s1, s2) {
+      const str1 = (s1 || '').toLowerCase().trim().replace(/[^a-z]/g, '');
+      const str2 = (s2 || '').toLowerCase().trim().replace(/[^a-z]/g, '');
+      if (str1 === str2) return 1.0;
+      if (!str1 || !str2) return 0.0;
+      
+      // 部分包含視為高度相近
+      if (str1.includes(str2) || str2.includes(str1)) {
+        const minLen = Math.min(str1.length, str2.length);
+        const maxLen = Math.max(str1.length, str2.length);
+        if (minLen / maxLen >= 0.7) return 0.92;
+      }
+
+      const dp = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null));
+      for (let i = 0; i <= str1.length; i++) dp[0][i] = i;
+      for (let j = 0; j <= str2.length; j++) dp[j][0] = j;
+
+      for (let j = 1; j <= str2.length; j++) {
+        for (let i = 1; i <= str1.length; i++) {
+          const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+          dp[j][i] = Math.min(
+            dp[j][i - 1] + 1,
+            dp[j - 1][i] + 1,
+            dp[j - 1][i - 1] + cost
+          );
+        }
+      }
+
+      const dist = dp[str2.length][str1.length];
+      return Math.max(0, 1 - dist / Math.max(str1.length, str2.length));
+    },
+
+    // 依據辨識文字評定五顆心與分數
+    evaluatePronunciation(spoken, targetWord) {
+      const sim = this.computeLevenshteinSimilarity(spoken, targetWord);
+      let hearts = 0;
+      let score = 0;
+      let msg = '';
+
+      if (sim >= 0.82 || spoken.trim().toLowerCase() === targetWord.toLowerCase()) {
+        hearts = 5;
+        score = 3.0;
+        msg = `🎉 發音極佳！完全吻合標準美式發音！辨識結果：「${spoken}」(獲得滿分 3.0 分)`;
+        SoundFX.correct();
+      } else if (sim >= 0.68) {
+        hearts = 4;
+        score = 2.4;
+        msg = `👏 發音清晰標準！辨識結果：「${spoken}」(獲得 2.4 分，4 顆心)`;
+        SoundFX.matchSuccess();
+      } else if (sim >= 0.48) {
+        hearts = 3;
+        score = 1.8;
+        msg = `👍 發音大致可辨！辨識結果：「${spoken}」(獲得 1.8 分，可重錄爭取滿分)`;
+      } else if (sim >= 0.28) {
+        hearts = 2;
+        score = 1.2;
+        msg = `⚠️ 發音略有落差，辨識結果：「${spoken}」(獲得 1.2 分，建議點擊「聽標準發音」重試)`;
+      } else if (spoken.length > 0) {
+        hearts = 1;
+        score = 0.6;
+        msg = `⚠️ 已偵測到語音，但與目標單字差距較大：「${spoken}」(獲得 0.6 分)`;
+      } else {
+        hearts = 0;
+        score = 0.0;
+        msg = `⚠️ 未偵測到清晰語音，請靠近麥克風重試或點擊「聽音跟讀自評」`;
+      }
+
+      this.setHearts(hearts, msg, score, spoken);
+    },
+
+    renderLetterSlots(length) {
+      const container = document.getElementById('letterSlotsDisplay');
+      container.innerHTML = '';
+      for (let i = 0; i < length; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'slot-box';
+        slot.id = `slot-${i}`;
+        container.appendChild(slot);
+      }
+    },
+
+    updateLetterSlots(val) {
+      const cleanVal = val.trim().toLowerCase();
+      const current = this.selectedWords[this.spellingIndex];
+      if (!current) return;
+      
+      for (let i = 0; i < current.word.length; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        if (!slot) continue;
+        if (i < cleanVal.length) {
+          slot.textContent = cleanVal[i];
+          slot.classList.add('filled');
+        } else {
+          slot.textContent = '';
+          slot.classList.remove('filled');
+        }
+      }
+    },
+
+    submitSpelling() {
+      const input = document.getElementById('spellingInput');
+      const userText = input.value.trim().toLowerCase();
+      const current = this.selectedWords[this.spellingIndex];
+      const targetWord = current.word.trim().toLowerCase();
+      const feedback = document.getElementById('spellingFeedback');
+
+      if (!userText) {
+        feedback.textContent = '⚠️ 請輸入單字拼寫再送出！';
+        feedback.className = 'spelling-feedback wrong';
+        input.focus();
+        return;
+      }
+
+      input.disabled = true;
+      document.getElementById('btnSubmitSpelling').disabled = true;
+
+      const isCorrect = (userText === targetWord);
+      const oralPts = this.currentOralRating.score;
+      const spellPts = isCorrect ? 3 : 0;
+      const totalQuestionPts = parseFloat((oralPts + spellPts).toFixed(1));
+
+      // 累積得分
+      this.oralScore += oralPts;
+      this.spellingScore += spellPts;
+      this.updateScoreBadge();
+
+      if (isCorrect) {
+        SoundFX.correct();
+        feedback.textContent = `🎉 拼寫正確！+3.0分 ｜ 口說得 ${oralPts.toFixed(1)}分 (本題共得 ${totalQuestionPts} / 6.0 分)`;
+        feedback.className = 'spelling-feedback correct';
+      } else {
+        SoundFX.wrong();
+        feedback.textContent = `❌ 拼寫錯誤！正確單字為：${current.word} ｜ 口說得 ${oralPts.toFixed(1)}分`;
+        feedback.className = 'spelling-feedback wrong';
+        document.getElementById('spellingInput').classList.add('shake-anim');
+        setTimeout(() => document.getElementById('spellingInput').classList.remove('shake-anim'), 400);
+      }
+
+      this.spellingResults.push({
+        wordObj: current,
+        isCorrect: isCorrect,
+        userAnswer: userText,
+        oralHearts: this.currentOralRating.hearts,
+        oralScore: oralPts,
+        spokenText: this.currentOralRating.spoken
+      });
+
+      // 1.5 秒後進入下一題
+      setTimeout(() => {
+        this.spellingIndex++;
+        this.loadSpellingQuestion();
+      }, 1500);
+    },
+
+    // 語音辨識與即時五星評量 (Web Speech API)
+    startSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recordBtn = document.getElementById('btnOralRecord');
+      const current = this.selectedWords[this.spellingIndex];
+      
+      if (!SpeechRecognition) {
+        alert('您的瀏覽器目前不支援麥克風語音辨識功能，請使用「🎧 聽音跟讀自評」按鈕進行發音評分！');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 3;
+
+      recordBtn.classList.add('listening');
+      recordBtn.innerHTML = '<span>🔴</span> 錄音聆聽中，請唸出英文...';
+
+      recognition.onresult = (event) => {
+        const spoken = event.results[0][0].transcript.trim().toLowerCase();
+        const input = document.getElementById('spellingInput');
+        
+        // 評定發音五顆心標準度
+        this.evaluatePronunciation(spoken, current.word);
+
+        // 若尚未輸入拼寫且辨識為高度相近或正確單字，貼心自動帶入輸入框
+        if (!input.value.trim() && this.currentOralRating.hearts >= 4) {
+          input.value = current.word;
+          this.updateLetterSlots(current.word);
+        }
+      };
+
+      recognition.onerror = (e) => {
+        console.warn('Speech recognition error', e);
+        this.setHearts(
+          0,
+          '⚠️ 未能清晰辨識語音，請靠近麥克風重錄，或點選「🎧 聽音跟讀自評」。',
+          0,
+          ''
+        );
+      };
+
+      recognition.onend = () => {
+        recordBtn.classList.remove('listening');
+        recordBtn.innerHTML = '<span>🎙️</span> 麥克風錄音評分';
+      };
+
+      try {
+        recognition.start();
+      } catch (err) {
+        recordBtn.classList.remove('listening');
+        recordBtn.innerHTML = '<span>🎙️</span> 麥克風錄音評分';
+      }
+    },
+
+    /* ----------------------------------------------------
+       第二階段：課本例句連連看配對 (每題 4 分，共 40 分)
+       ---------------------------------------------------- */
+    transitionToMatchingStage() {
+      document.getElementById('spellingStage').classList.add('hidden');
+      document.getElementById('matchingStage').classList.remove('hidden');
+      this.updateStageStep(2);
+      this.renderMatchingBoard();
+    },
+
+    renderMatchingBoard() {
+      const wordsContainer = document.getElementById('wordsListContainer');
+      const sentencesContainer = document.getElementById('sentencesListContainer');
+      wordsContainer.innerHTML = '';
+      sentencesContainer.innerHTML = '';
+
+      // 左側單字 (隨機打散)
+      const shuffledWords = [...this.selectedWords].sort(() => 0.5 - Math.random());
+      // 右側例句 (隨機打散)
+      const shuffledSentences = [...this.selectedWords].sort(() => 0.5 - Math.random());
+
+      shuffledWords.forEach((item) => {
+        const chip = document.createElement('div');
+        chip.className = 'word-chip';
+        chip.dataset.wordId = item.id;
+        chip.dataset.word = item.word;
+        chip.innerHTML = `
+          <span><b>${item.word}</b> <span style="font-size:12.5px; color:#64748B;">(${item.pos})</span></span>
+          <span class="badge-match-order"></span>
+        `;
+        chip.addEventListener('click', () => this.handleWordChipClick(chip, item));
+        wordsContainer.appendChild(chip);
+      });
+
+      shuffledSentences.forEach((item) => {
+        // 將例句中的目標單字挖空
+        const blankedSentence = this.makeBlankSentence(item.sentence, item.word);
+        const card = document.createElement('div');
+        card.className = 'sentence-card';
+        card.dataset.sentenceId = item.id;
+        card.dataset.targetWord = item.word;
+        card.innerHTML = `
+          <div class="sentence-en">${blankedSentence}</div>
+          <div class="sentence-trans">（${item.translation}）</div>
+        `;
+        card.addEventListener('click', () => this.handleSentenceCardClick(card, item));
+        sentencesContainer.appendChild(card);
+      });
+
+      this.updateMatchingCounter();
+    },
+
+    makeBlankSentence(sentence, targetWord) {
+      let pattern = `\\b${targetWord}\\w*\\b`;
+      if (targetWord.toLowerCase() === 'weep') {
+        pattern = `\\b(weep|weeps|weeping|wept)\\b`;
+      } else if (targetWord.toLowerCase() === 'steal') {
+        pattern = `\\b(steal|steals|stealing|stole|stolen)\\b`;
+      }
+      const reg = new RegExp(pattern, 'i');
+      if (reg.test(sentence)) {
+        return sentence.replace(reg, `<span class="blank-target">______</span>`);
+      }
+      return `${sentence} <span class="blank-target">[${targetWord}]</span>`;
+    },
+
+    handleWordChipClick(chip, item) {
+      if (chip.classList.contains('matched')) return;
+
+      // 若已選取此單字，則取消選取
+      if (this.selectedWordItem && this.selectedWordItem.chip === chip) {
+        chip.classList.remove('selected');
+        this.selectedWordItem = null;
+        return;
+      }
+
+      // 清除其他已選單字
+      document.querySelectorAll('.word-chip.selected').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      this.selectedWordItem = { chip, item };
+
+      // 朗讀該單字
+      speakEnglish(item.word);
+
+      // 若此時已有例句被選取，嘗試配對
+      if (this.selectedSentenceItem) {
+        this.checkMatch();
+      }
+    },
+
+    handleSentenceCardClick(card, item) {
+      if (card.classList.contains('matched')) return;
+
+      // 若已選取此例句，取消選取
+      if (this.selectedSentenceItem && this.selectedSentenceItem.card === card) {
+        card.classList.remove('selected');
+        this.selectedSentenceItem = null;
+        return;
+      }
+
+      // 清除其他已選例句
+      document.querySelectorAll('.sentence-card.selected').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      this.selectedSentenceItem = { card, item };
+
+      // 若此時已有單字被選取，嘗試配對
+      if (this.selectedWordItem) {
+        this.checkMatch();
+      }
+    },
+
+    checkMatch() {
+      const wordObj = this.selectedWordItem.item;
+      const sentenceObj = this.selectedSentenceItem.item;
+      const wordChip = this.selectedWordItem.chip;
+      const sentenceCard = this.selectedSentenceItem.card;
+
+      const isMatch = (wordObj.id === sentenceObj.id);
+
+      if (isMatch) {
+        SoundFX.matchSuccess();
+        this.matchedPairsCount++;
+        this.matchingScore += 4; // 每題 4 分，共 40 分
+        this.updateScoreBadge();
+
+        // 標記成功配對樣式
+        wordChip.classList.remove('selected');
+        wordChip.classList.add('matched');
+        wordChip.querySelector('.badge-match-order').textContent = '✓';
+
+        sentenceCard.classList.remove('selected');
+        sentenceCard.classList.add('matched');
+        
+        // 替換例句中的底線為完整單字
+        const blank = sentenceCard.querySelector('.blank-target');
+        if (blank) {
+          blank.textContent = wordObj.word;
+        }
+
+        this.selectedWordItem = null;
+        this.selectedSentenceItem = null;
+        this.updateMatchingCounter();
+
+        // 檢查是否所有 10 題皆配對完成
+        if (this.matchedPairsCount === this.selectedWords.length) {
+          setTimeout(() => {
+            SoundFX.completeFanfare();
+            this.finishGame();
+          }, 800);
+        }
+      } else {
+        SoundFX.wrong();
+        wordChip.classList.add('shake-anim');
+        sentenceCard.classList.add('shake-anim');
+
+        setTimeout(() => {
+          wordChip.classList.remove('shake-anim', 'selected');
+          sentenceCard.classList.remove('shake-anim', 'selected');
+          this.selectedWordItem = null;
+          this.selectedSentenceItem = null;
+        }, 450);
+      }
+    },
+
+    updateMatchingCounter() {
+      document.getElementById('matchedWordsCount').textContent = `${this.matchedPairsCount} / 10 配對完成`;
+    },
+
+    /* ----------------------------------------------------
+       成績結算與解析報告 (滿分 100 分 = 口說 30 + 拼寫 30 + 配對 40)
+       ---------------------------------------------------- */
+    finishGame() {
+      clearInterval(this.timerInterval);
+
+      document.getElementById('spellingStage').classList.add('hidden');
+      document.getElementById('matchingStage').classList.add('hidden');
+      document.getElementById('stageIndicator').classList.add('hidden');
+      document.getElementById('resultStage').classList.remove('hidden');
+
+      const totalScore = Math.round(this.oralScore + this.spellingScore + this.matchingScore);
+      const timeSpentSec = this.totalTimeSeconds - this.remainingSeconds;
+      const spentMin = Math.floor(timeSpentSec / 60);
+      const spentSec = timeSpentSec % 60;
+      const formattedTime = `${String(spentMin).padStart(2, '0')}:${String(spentSec).padStart(2, '0')}`;
+
+      // 分數圓環動畫
+      const scoreCircle = document.getElementById('scoreCirclePath');
+      const maxOffset = 440;
+      const targetOffset = maxOffset - (maxOffset * (totalScore / 100));
+      setTimeout(() => {
+        scoreCircle.style.strokeDashoffset = targetOffset;
+      }, 100);
+
+      // 計算平均口說星等
+      const totalHearts = this.spellingResults.reduce((sum, r) => sum + (r.oralHearts || 0), 0);
+      const avgHearts = (totalHearts / 10).toFixed(1);
+
+      document.getElementById('finalScoreText').innerHTML = `${totalScore}<span>/100</span>`;
+      document.getElementById('statOralScore').textContent = `${this.oralScore.toFixed(1)} / 30 分`;
+      document.getElementById('statOralAvgHearts').textContent = `平均 ${avgHearts} 顆心 ❤️`;
+      document.getElementById('statSpellingScore').textContent = `${this.spellingScore} / 30 分`;
+      document.getElementById('statMatchingScore').textContent = `${this.matchingScore} / 40 分`;
+      document.getElementById('statTimeSpent').textContent = formattedTime;
+      document.getElementById('statAccuracy').textContent = `${totalScore}%`;
+
+      // 評價與稱號
+      const titleEl = document.getElementById('resultTitle');
+      const badgeEl = document.getElementById('resultRankBadge');
+      if (totalScore >= 95) {
+        titleEl.textContent = '🏆 卓越絕倫！字彙救贖大宗師！';
+        badgeEl.textContent = '等級：SSS 級 • Lexical Grandmaster';
+      } else if (totalScore >= 80) {
+        titleEl.textContent = '🌟 成績優異！單字精熟達人！';
+        badgeEl.textContent = '等級：A 級 • Redemption Scholar';
+      } else if (totalScore >= 60) {
+        titleEl.textContent = '👍 表現良好！順利通關！';
+        badgeEl.textContent = '等級：B 級 • Dedicated Achiever';
+      } else {
+        titleEl.textContent = '💪 勇於挑戰！再接再厲！';
+        badgeEl.textContent = '等級：C 級 • Aspiring Learner';
+      }
+
+      this.renderReviewList();
+    },
+
+    renderReviewList() {
+      const container = document.getElementById('reviewListContainer');
+      container.innerHTML = '';
+
+      this.selectedWords.forEach((wordObj, idx) => {
+        const result = this.spellingResults.find(r => r.wordObj.id === wordObj.id);
+        const isSpellCorrect = result ? result.isCorrect : false;
+        const heartsCount = result ? result.oralHearts : 0;
+        const oralPts = result ? result.oralScore : 0;
+        const spokenText = result ? result.spokenText : '';
+
+        const heartsDisplay = '❤️'.repeat(heartsCount) + '🤍'.repeat(5 - heartsCount);
+
+        const card = document.createElement('div');
+        card.className = 'review-item-card';
+        card.innerHTML = `
+          <div class="review-item-header">
+            <div class="review-word-info">
+              <span style="font-weight:800; color:#64748B;">Q${idx + 1}.</span>
+              <span class="review-word">${wordObj.word}</span>
+              <span class="review-pos">${wordObj.pos}</span>
+              <span style="font-size:12.5px; color:#6366F1;">${wordObj.phonetic}</span>
+              <span class="review-meaning">【${wordObj.chinese}】</span>
+              <button class="btn-speak-icon" onclick="speakEnglish('${wordObj.word}')" title="播放單字發音">🔊</button>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:13px; font-weight:700;">
+              <div>
+                🎤 口說：<span style="color:#D97706;">${heartsDisplay}</span> (${oralPts.toFixed(1)}/3分)${spokenText ? ` <span style="font-size:12px; color:#64748B;">[辨識: ${spokenText}]</span>` : ''}
+              </div>
+              <div>
+                ✍️ 拼寫：${isSpellCorrect ? '<span style="color:#10B981;">✓ 正確 (+3分)</span>' : `<span style="color:#EF4444;">✗ 錯誤 (輸入: ${result ? result.userAnswer : '無'})</span>`}
+              </div>
+            </div>
+          </div>
+          <div class="review-sentence-box">
+            <div><b>課本例句：</b>${this.highlightWord(wordObj.sentence, wordObj.word)}</div>
+            <div class="review-sentence-trans"><b>中文翻譯：</b>${wordObj.translation}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    },
+
+    highlightWord(sentence, word) {
+      let pattern = `\\b(${word}\\w*)\\b`;
+      if (word.toLowerCase() === 'weep') {
+        pattern = `\\b(weep|weeps|weeping|wept)\\b`;
+      } else if (word.toLowerCase() === 'steal') {
+        pattern = `\\b(steal|steals|stealing|stole|stolen)\\b`;
+      }
+      const reg = new RegExp(pattern, 'gi');
+      return sentence.replace(reg, `<b style="color:#4F46E5; text-decoration:underline;">$1</b>`);
+    }
+  };
+
+  /* ==========================================================
+     TTS 英文語音發音
+     ========================================================== */
+  function speakEnglish(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // 網頁載入完成初始化
+  window.addEventListener('DOMContentLoaded', () => {
+    Game.init();
+  });
+</script>
+
+</body>
+</html>
